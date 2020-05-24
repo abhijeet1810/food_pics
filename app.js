@@ -14,10 +14,12 @@ mongoose.connection
   .on('error', (err) => { console.log('failed to connect to mongodb', err) })
 
 require('./models/user')
+require('./models/post')
 
 app.use(express.json())
-app.use(require('./routes/auth.js'))
+app.use(require('./routes/auth'))
+app.use(require('./routes/post'))
 
 app.listen(PORT, () => {
-  console.log('Serer listening on port number ', PORT)
+  console.log('Server listening on port number ', PORT)
 })

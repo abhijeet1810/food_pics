@@ -19,6 +19,7 @@
         "linebreak-style": ["error", "windows"],
         "quotes": [2, "single", "avoid-escape"],
         "consistent-return": "off",
-        "no-console":"off"
+        "no-console":"off",
+        "no-underscore-dangle":"off"
     }
 }
