@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { UserContext } from "../../App";
 
 const Profile = () => {
   const [mypics, setPics] = useState([]);
+  const { state, dispatch } = useContext(UserContext);
+  console.log(state);
 
   useEffect(() => {
     fetch("/mypost", {
@@ -15,6 +18,7 @@ const Profile = () => {
         setPics(result.posts);
       });
   }, []);
+
   return (
     <div className="profile-body">
       <div
@@ -32,7 +36,8 @@ const Profile = () => {
           />
         </div>
         <div>
-          <h4>MS Dhoni</h4>
+          <h4>{state ? state.name : "loading"}</h4>
+          <h5>{state ? state.email : "loading"}</h5>
           <div
             style={{
               display: "flex",
@@ -40,9 +45,9 @@ const Profile = () => {
               width: "110%",
             }}
           >
-            <h6>40 Posts</h6>
-            <h6>40 Followers</h6>
-            <h6>40 Following</h6>
+            <h6>{mypics.length} Posts</h6>
+            <h6>{state ? state.followers.length : 0} Followers</h6>
+            <h6>{state ? state.following.length : 0} Following</h6>
           </div>
         </div>
       </div>

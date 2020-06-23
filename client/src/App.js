@@ -4,9 +4,11 @@ import "./App.scss";
 import { BrowserRouter, Route, Switch, useHistory } from "react-router-dom";
 import Home from "./components/screens/Home";
 import Profile from "./components/screens/Profile";
+import UserProfile from "./components/screens/UserProfile";
 import Signin from "./components/screens/Signin";
 import Signup from "./components/screens/Signup";
 import CreatePost from "./components/screens/CreatePost";
+import SubscribedUserPost from "./components/screens/SubscribedUsersPost";
 import { reducer, initialState } from "./reducers/userReducer";
 
 export const UserContext = createContext();
@@ -19,7 +21,6 @@ const Routing = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user) {
       dispatch({ type: "USER", payload: user });
-      history.push("/");
     } else {
       history.push("/signin");
     }
@@ -36,11 +37,17 @@ const Routing = () => {
       <Route path="/signup">
         <Signup />
       </Route>
-      <Route path="/profile">
+      <Route exact path="/profile">
         <Profile />
       </Route>
       <Route path="/create">
         <CreatePost />
+      </Route>
+      <Route path="/profile/:userid">
+        <UserProfile />
+      </Route>
+      <Route path="/myfollowingpost">
+        <SubscribedUserPost />
       </Route>
     </Switch>
   );
